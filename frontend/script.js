@@ -20,17 +20,27 @@ class App {
     this.method();
   }
   method() {
+    //class-n belül a metódus előtt nincs function megnevezés! (láthatóság lehet! => # = privát)
     logVariable();
+    //function-ba való deklarálással előtte is hívható:
     function logVariable() {
       const task = function () {
         const inner = () => {
           console.log(globalVariable);
         };
-        inner();
+        inner(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
       };
-      task();
+      task(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
     }
   }
 }
 
 const app = new App();
+
+window.addEventListener(`load`, onLoadEvent);
+
+function onLoadEvent() {
+  console.log(`page has been loaded`);
+}
+
+//calling order:
