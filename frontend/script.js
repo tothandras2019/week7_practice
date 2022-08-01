@@ -1,5 +1,7 @@
 `use strict`;
 
+window.addEventListener(`load`, onLoadEvent);
+
 const scopeType = `Block scope, Function scope, Global scope`;
 
 let globalVariable = `global value`;
@@ -21,23 +23,21 @@ class App {
   }
   method() {
     //class-n belül a metódus előtt nincs function megnevezés! (láthatóság lehet! => # = privát)
-    logVariable();
+    methodTask();
     //function-ba való deklarálással előtte is hívható:
-    function logVariable() {
-      const task = function () {
-        const inner = () => {
+    function methodTask() {
+      const functionTask = function () {
+        const innerTask = () => {
           console.log(globalVariable);
         };
-        inner(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
+        innerTask(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
       };
-      task(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
+      functionTask(); //hoisting miatt a létrehozás (deklarálás) után kell lennie
     }
   }
 }
 
 const app = new App();
-
-window.addEventListener(`load`, onLoadEvent);
 
 function onLoadEvent() {
   console.log(`page has been loaded`);
